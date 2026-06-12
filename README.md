@@ -71,7 +71,7 @@ make pages-create
 
 `.github/workflows/ci.yml` 會在 pull request 與 `main` push 時跑檢查。
 
-部署不會在 push 時自動執行。要從 GitHub Actions 部署，請到 Actions → CI → Run workflow 手動觸發；手動觸發會先跑檢查，通過後部署 `public/` 到 Cloudflare Pages。
+部署不會在 push 時自動執行。要從 GitHub Actions 部署，請到 Actions → Deploy Pages → Run workflow 手動觸發；手動觸發會先跑檢查，通過後部署 `public/` 到 Cloudflare Pages。
 
 workflow 不會建立 Cloudflare Pages project。請先在 Cloudflare 建好 `menukit` Pages project，或在本機執行一次：
 
@@ -79,7 +79,7 @@ workflow 不會建立 Cloudflare Pages project。請先在 Cloudflare 建好 `me
 make pages-create
 ```
 
-GitHub Actions 手動部署需要在 repository secrets 設定：
+`Deploy Pages` 手動部署需要在 repository secrets 設定：
 
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
