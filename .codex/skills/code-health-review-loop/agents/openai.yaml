@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Health Review Loop"
+  short_description: "Iterative test, duplication, and docs review"
+  default_prompt: "Use $code-health-review-loop to review this repo for missing or broken tests, dead code, duplication, abstractions, and documentation gaps for 3 loops."

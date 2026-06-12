@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Commit Helper"
+  short_description: "Draft conventional commit messages"
+  default_prompt: "Look at the current diff and draft the best conventional commit message for it."

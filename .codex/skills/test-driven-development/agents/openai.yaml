@@ -1,0 +1,4 @@
+interface:
+  display_name: "TDD"
+  short_description: "Implement changes with tests first"
+  default_prompt: "Use a strict red-green-refactor workflow for this feature or bugfix."

@@ -1,0 +1,42 @@
+{
+  "name": "menukit-cloudflare",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "remoteUser": "node",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "cloudflare.cloudflare-workers-bindings-extension",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "openai.chatgpt"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [
+    5173,
+    8787
+  ],
+  "portsAttributes": {
+    "5173": {
+      "label": "App dev server"
+    },
+    "8787": {
+      "label": "Cloudflare Wrangler"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
+}

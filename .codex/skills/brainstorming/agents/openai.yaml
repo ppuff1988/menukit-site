@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brainstorming"
+  short_description: "Shape ideas into plans and specs"
+  default_prompt: "Help me turn this rough idea into a concrete design, trade-off analysis, or implementation-ready spec."

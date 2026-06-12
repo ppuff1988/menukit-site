@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI/UX Pro Max"
+  short_description: "Design systems, UI reviews, and frontend guidance"
+  default_prompt: "Help me design or review this interface using the bundled UI/UX guidance and stack-aware recommendations."

@@ -1,0 +1,11 @@
+FROM node:24-bookworm
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    jq \
+    sqlite3 \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g wrangler@latest
