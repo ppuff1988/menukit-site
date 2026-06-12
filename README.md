@@ -64,7 +64,32 @@ make deploy
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
 
-目前 token 只需要能部署 Cloudflare Pages。未來加入 D1 migration 或 R2 檔案流程時，再把同一顆 token 的權限擴充到 D1 / R2，並在 workflow 裡加入對應步驟。
+目前 `CLOUDFLARE_API_TOKEN` 只需要能部署 Cloudflare Pages：
+
+- Account → Cloudflare Pages → Edit
+
+未來加入 D1 migration 或 R2 檔案流程時，再把同一顆 token 的權限擴充：
+
+- Account → D1 → Edit
+- Account → Workers R2 Storage → Edit
+
+## Turnstile
+
+目前首頁沒有實際送出的表單，只有 LINE 與 Email 聯絡入口，因此尚未放入 Turnstile widget。之後新增訂閱、詢價、登入或訂單表單時，再接 Turnstile。
+
+未來接 Turnstile 時會需要：
+
+- Turnstile site key：給前端 widget 使用，可放在 Pages 環境變數，例如 `TURNSTILE_SITE_KEY`。
+- Turnstile secret key：只能放在 Cloudflare secret 或 GitHub secret，例如 `TURNSTILE_SECRET_KEY`，不可寫入 repo。
+- 後端驗證流程：表單送出時帶上 `cf-turnstile-response`，由 Pages Function 或 Worker 呼叫 Turnstile `siteverify` 驗證後，再執行原本的訂閱 / 訂單邏輯。
+
+如果要用 GitHub Actions 自動建立或管理 Turnstile widget，`CLOUDFLARE_API_TOKEN` 需要再加：
+
+- Account → Turnstile → Edit
+
+如果要在 CI/CD 裡部署獨立的 siteverify Worker，還需要：
+
+- Account → Workers Scripts → Edit
 
 ## 圖片資產
 
@@ -85,10 +110,6 @@ LINE：`@078xovcj`
 ## 版權聲明
 
 Copyright © 2026 MenuKit. All rights reserved.
-
-中文翻譯：
-
-版權所有 © 2026 MenuKit。保留所有權利。
 
 本原始碼公開可見，僅供部署與審閱用途。
 
