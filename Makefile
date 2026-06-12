@@ -1,4 +1,4 @@
-.PHONY: help install dev landing open check check-node deploy
+.PHONY: help install dev landing open check check-node pages-create deploy
 
 PORT ?= 8787
 HOST ?= 0.0.0.0
@@ -14,6 +14,7 @@ help:
 	@echo "  make landing            Print the local landing page URL"
 	@echo "  make open               Open the local landing page in your browser"
 	@echo "  make check              Check Cloudflare Pages files exist"
+	@echo "  make pages-create       Create the Cloudflare Pages project"
 	@echo "  make deploy             Deploy public/ to Cloudflare Pages"
 	@echo ""
 	@echo "Options:"
@@ -69,3 +70,6 @@ check-node:
 
 deploy: check check-node
 	@$(WRANGLER) pages deploy public --project-name $(PROJECT_NAME)
+
+pages-create: check-node
+	@$(WRANGLER) pages project create $(PROJECT_NAME) --production-branch main

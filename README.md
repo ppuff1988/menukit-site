@@ -55,9 +55,17 @@ make check
 make deploy
 ```
 
+若要在本機先建立 Cloudflare Pages project：
+
+```bash
+make pages-create
+```
+
 ## GitHub Actions CI/CD
 
 `.github/workflows/deploy.yml` 會在 pull request 跑檢查，並在 `main` push 或手動觸發時部署到 Cloudflare Pages。
+
+第一次部署時，如果 Cloudflare 帳號裡還沒有 `menukit` Pages project，workflow 會先建立 project，再部署 `public/`。
 
 需要在 GitHub repository secrets 設定：
 
