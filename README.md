@@ -67,18 +67,30 @@ make deploy
 make pages-create
 ```
 
-## GitHub Actions CI/CD
+## GitHub Actions CI / Manual CD
 
-`.github/workflows/deploy.yml` 會在 pull request 跑檢查，並在 `main` push 或手動觸發時部署到 Cloudflare Pages。
+`.github/workflows/ci.yml` 會在 pull request 與 `main` push 時跑檢查。
 
-第一次部署時，如果 Cloudflare 帳號裡還沒有 `menukit` Pages project，workflow 會先建立 project，再部署 `public/`。
+部署不會在 push 時自動執行。要從 GitHub Actions 部署，請到 Actions → CI → Run workflow 手動觸發；手動觸發會先跑檢查，通過後部署 `public/` 到 Cloudflare Pages。
 
-需要在 GitHub repository secrets 設定：
+workflow 不會建立 Cloudflare Pages project。請先在 Cloudflare 建好 `menukit` Pages project，或在本機執行一次：
+
+```bash
+make pages-create
+```
+
+GitHub Actions 手動部署需要在 repository secrets 設定：
 
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
 
-目前 `CLOUDFLARE_API_TOKEN` 只需要能部署 Cloudflare Pages：
+手動部署前，請先用 Wrangler 登入 Cloudflare：
+
+```bash
+npx wrangler login
+```
+
+`CLOUDFLARE_API_TOKEN` 目前只需要：
 
 - Account → Cloudflare Pages → Edit
 
@@ -97,11 +109,11 @@ make pages-create
 - Turnstile secret key：只能放在 Cloudflare secret 或 GitHub secret，例如 `TURNSTILE_SECRET_KEY`，不可寫入 repo。
 - 後端驗證流程：表單送出時帶上 `cf-turnstile-response`，由 Pages Function 或 Worker 呼叫 Turnstile `siteverify` 驗證後，再執行原本的訂閱 / 訂單邏輯。
 
-如果要用 GitHub Actions 自動建立或管理 Turnstile widget，`CLOUDFLARE_API_TOKEN` 需要再加：
+如果未來重新啟用 GitHub Actions 自動建立或管理 Turnstile widget，`CLOUDFLARE_API_TOKEN` 需要再加：
 
 - Account → Turnstile → Edit
 
-如果要在 CI/CD 裡部署獨立的 siteverify Worker，還需要：
+如果要在自動化流程裡部署獨立的 siteverify Worker，還需要：
 
 - Account → Workers Scripts → Edit
 
