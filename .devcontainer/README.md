@@ -1,37 +1,31 @@
 # Dev Container
 
-This dev container is prepared for a future Cloudflare stack:
+This dev container is prepared for the current MenuKit Cloudflare Pages landing project:
 
-- Cloudflare Pages development through your project framework dev server
-- Cloudflare D1 local work through Wrangler and `sqlite3`
-- Cloudflare R2 bindings through Wrangler
+- Cloudflare Pages local development through Wrangler
+- Static assets served from `public/`
+- Pages Functions under `functions/`
 
 Included tools:
 
 - Node.js 24
-- npm and Corepack-enabled package managers
+- npm
 - Wrangler CLI
-- SQLite CLI
 - Git and GitHub CLI
 
-Common commands once the app is added:
+Common commands:
 
 ```bash
-wrangler login
-wrangler pages dev ./dist
-wrangler d1 list
-wrangler r2 bucket list
+npm ci
+make check
+make dev
 ```
 
-When `wrangler.toml` is added later, define the D1 and R2 bindings there, for example:
+Deployment is handled by GitHub Actions. For manual Cloudflare Pages project setup:
 
-```toml
-[[d1_databases]]
-binding = "DB"
-database_name = "menukit"
-database_id = "replace-with-cloudflare-d1-id"
-
-[[r2_buckets]]
-binding = "BUCKET"
-bucket_name = "menukit-assets"
+```bash
+make pages-create
+make deploy
 ```
+
+D1, R2, and Turnstile bindings are intentionally not configured yet. Add them only when the subscription, order, upload, or protected-form flows are implemented.

@@ -16,4 +16,3 @@ if [ -f package.json ]; then
 fi
 
 wrangler --version
-sqlite3 --version

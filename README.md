@@ -49,6 +49,12 @@ PORT=5174 make dev
 make check
 ```
 
+也可以使用 npm script：
+
+```bash
+npm run check
+```
+
 部署：
 
 ```bash

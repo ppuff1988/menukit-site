@@ -5,7 +5,6 @@ RUN apt-get update \
     ca-certificates \
     curl \
     jq \
-    sqlite3 \
   && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g wrangler@latest
